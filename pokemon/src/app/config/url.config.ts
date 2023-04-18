@@ -1,5 +1,6 @@
 const baseUrl = 'https://pokeapi.co/api/v2';
 
 export const urlConfig = Object.freeze({
-  pokemonsTypes: `${baseUrl}/type`,
+  pokemonType: (searchParam: string) => `${baseUrl}/type/${searchParam}`,
+  allPokemonsTypes: `${baseUrl}/type/`,
 });

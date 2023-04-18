@@ -1,4 +1,40 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .container {
+  width: 100%;
+  max-width: 1000px;
+
   &__tab-group {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% + 10px);
+    width: calc(100% + 10px);
+
+    ::ng-deep .mat-tab-header {
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 0 10px;
+    }
+    ::ng-deep .mat-mdc-tab-body-content,
+    ::ng-deep .mat-mdc-tab-labels {
+      padding: 0 10px;
+      visibility: visible !important;
+      min-height: unset !important;
+    }
+    ::ng-deep .mat-tab-label-active {
+      opacity: 1;
+      .container__tab-group__title {
+        color: var(--red-text);
+      }
+    }
+
+    &__title {
+      font-size: 1rem;
+      text-align: center;
+    }
   }
 }

@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { PokemonService } from './pokemon.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-pokemon',
   templateUrl: './pokemon.component.html',
   styleUrls: ['./pokemon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PokemonComponent implements OnInit {
-  pokemonsTypes$ = this.pokemonService.getPokemonTypes();
-
-  constructor(private readonly pokemonService: PokemonService) {}
-
-  ngOnInit(): void {}
-}
+export class PokemonComponent {}
