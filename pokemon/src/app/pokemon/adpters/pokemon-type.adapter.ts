@@ -11,6 +11,7 @@ export class PokemonTypeAdapter {
       label: 'Eficiência do dano',
       backgroundColor: [],
       hoverBackgroundColor: [],
+      minBarLength: 10,
     };
 
     Object.entries(data).forEach(([key, value]) => {

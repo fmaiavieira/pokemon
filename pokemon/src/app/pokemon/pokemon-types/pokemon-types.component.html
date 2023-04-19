@@ -1,32 +1,19 @@
 <section class="container">
-  <!-- <div class="container__search-box">
+  <div class="container__search-box">
     <mat-form-field class="container__search-box__field" appearance="outline">
-      <mat-label>Buscar Tipo</mat-label>
-      <input [(ngModel)]="searchTerm" matInput />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      class="container__search-box__button"
-      color="primary"
-      (click)="search()"
-    >
-      Buscar
-    </button>
-  </div> -->
-
-  <form class="example-form">
-    <mat-form-field class="container__search-box__field" appearance="outline">
-      <mat-label>Number</mat-label>
+      <mat-label>Buscar Por tipo</mat-label>
       <input
         type="text"
-        placeholder="Pick one"
-        aria-label="Number"
+        placeholder="Ex.: grass"
         matInput
         [formControl]="searchControl"
-        (optionSelected)="search($event)"
         [matAutocomplete]="auto"
       />
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto="matAutocomplete"
+        (optionSelected)="search($event)"
+      >
         <mat-option
           *ngFor="let option of filteredTypeOptions$ | async"
           [value]="option"
@@ -35,12 +22,12 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-  </form>
+  </div>
 
   <canvas
     baseChart
     class="container__chart"
-    [data]="barChartData$ | async"
+    [data]="(barChartData$ | async)!"
     [options]="barChartOptions"
     [plugins]="barChartPlugins"
     [legend]="barChartLegend"

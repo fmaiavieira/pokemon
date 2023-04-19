@@ -1,0 +1,24 @@
+<section class="container">
+  <div class="container__cards-list">
+    <ng-container *ngTemplateOutlet="paginator"></ng-container>
+    <app-pokemon-card
+      class="container__cards-list__card"
+      *ngFor="let pokemon of pokemons$ | async"
+      [pokemon]="pokemon"
+    ></app-pokemon-card>
+    <ng-container *ngTemplateOutlet="paginator"></ng-container>
+  </div>
+  <div class="container__details">details</div>
+</section>
+
+<ng-template #paginator>
+  <div class="container__cards-list__paginator">
+    <mat-paginator
+      [length]="pokemonsLength$ | async"
+      [pageSize]="12"
+      [pageSizeOptions]="[12, 24, 48]"
+      (page)="searchPage($event)"
+    >
+    </mat-paginator>
+  </div>
+</ng-template>

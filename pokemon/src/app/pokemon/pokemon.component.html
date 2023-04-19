@@ -1,6 +1,5 @@
 <section class="container">
   <mat-tab-group
-    dynamicHeight
     mat-stretch-tabs
     fitInkBarToContent
     class="container__tab-group"
@@ -14,8 +13,9 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <span class="container__tab-group__title">Pokemons</span>
+        <span class="container__tab-group__title">Pokedex</span>
       </ng-template>
+      <app-pokedex></app-pokedex>
     </mat-tab>
   </mat-tab-group>
 </section>

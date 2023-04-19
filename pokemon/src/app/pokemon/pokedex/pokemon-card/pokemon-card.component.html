@@ -1,0 +1,13 @@
+<section
+  *ngIf="details$ | async as pokemon"
+  class="container"
+  [style.backgroundColor]="pokemon.bgColor"
+>
+  <span class="container__name">{{ pokemon.name }}</span>
+  <img class="container__avatar" [src]="pokemon.imgUrl" alt="" />
+  <div class="container__types">
+    <span class="container__type" *ngFor="let type of pokemon.types">{{
+      type
+    }}</span>
+  </div>
+</section>
