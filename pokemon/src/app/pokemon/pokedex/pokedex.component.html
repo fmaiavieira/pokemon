@@ -1,24 +1,44 @@
 <section class="container">
   <div class="container__cards-list">
+    <div class="container__cards-list__search-box">
+      <mat-form-field
+        class="container__cards-list__search-box__field"
+        appearance="outline"
+      >
+        <mat-label>Buscar Pokemon</mat-label>
+        <input
+          type="text"
+          placeholder="Ex.: Bulbasaur"
+          matInput
+          [formControl]="searchControl"
+        />
+      </mat-form-field>
+    </div>
     <ng-container *ngTemplateOutlet="paginator"></ng-container>
     <app-pokemon-card
       class="container__cards-list__card"
-      *ngFor="let pokemon of pokemons$ | async"
+      *ngFor="
+        let pokemon of currentPagePokemons$ | async;
+        trackBy: pokemonTrackByFn
+      "
       [pokemon]="pokemon"
+      (onSelect)="setSelectedPokemon($event)"
     ></app-pokemon-card>
     <ng-container *ngTemplateOutlet="paginator"></ng-container>
   </div>
-  <div class="container__details">details</div>
+  <app-pokemon-details
+    class="container__details"
+    [pokemon]="selectedPokemon"
+  ></app-pokemon-details>
 </section>
 
 <ng-template #paginator>
-  <div class="container__cards-list__paginator">
-    <mat-paginator
-      [length]="pokemonsLength$ | async"
-      [pageSize]="12"
-      [pageSizeOptions]="[12, 24, 48]"
-      (page)="searchPage($event)"
-    >
-    </mat-paginator>
-  </div>
+  <mat-paginator
+    class="container__cards-list__paginator"
+    [length]="pokemonsLength$ | async"
+    [pageSize]="12"
+    [pageSizeOptions]="[12, 24, 48]"
+    (page)="searchPage($event)"
+  >
+  </mat-paginator>
 </ng-template>

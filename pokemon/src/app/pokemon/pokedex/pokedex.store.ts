@@ -1,27 +1,45 @@
 import { Store } from 'src/app/shared/store';
 import { PokemonService } from '../pokemon.service';
-import { map, pluck, switchMap, take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { NameLink } from '../interfaces/type-dto.interface';
-import { PageEvent } from '@angular/material/paginator';
 
 interface PokedexStateInterface {
   pokemons: NameLink[];
+  filteredPokemons: NameLink[];
   activePokemons: NameLink[];
   resultsCount: number;
 }
 
 @Injectable()
 export class PokedexStore extends Store<PokedexStateInterface> {
+  private currentStart: number = 0;
+  private currentEnd: number = 12;
   constructor(private readonly pokemonService: PokemonService) {
     super();
   }
 
   setActivePage(pageIndex: number, pageSize: number) {
-    const start = pageIndex * pageSize;
-    const end = start + pageSize;
+    this.currentStart = pageIndex * pageSize;
+    this.currentEnd = this.currentStart + pageSize;
     this.mutate({
-      activePokemons: [...this.state.pokemons.slice(start, end)],
+      activePokemons: [
+        ...this.state.filteredPokemons.slice(
+          this.currentStart,
+          this.currentEnd
+        ),
+      ],
+    });
+  }
+
+  filteredByName(name: string) {
+    const filtered = this.state.pokemons.filter((pokemon) =>
+      pokemon.name.includes(name)
+    );
+    this.mutate({
+      filteredPokemons: [...filtered],
+      activePokemons: [...filtered.slice(this.currentStart, this.currentEnd)],
+      resultsCount: filtered.length,
     });
   }
 
@@ -33,6 +51,7 @@ export class PokedexStore extends Store<PokedexStateInterface> {
         next: (res) => {
           this.mutate({
             pokemons: [...this.state.pokemons, ...res.results],
+            filteredPokemons: [...this.state.pokemons, ...res.results],
             resultsCount: res.count,
           });
           this.setActivePage(0, 12);
@@ -43,6 +62,7 @@ export class PokedexStore extends Store<PokedexStateInterface> {
   protected initialState(): PokedexStateInterface {
     return {
       pokemons: [],
+      filteredPokemons: [],
       activePokemons: [],
       resultsCount: 0,
     };

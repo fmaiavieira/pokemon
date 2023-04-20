@@ -1,0 +1,13 @@
+<section *ngIf="pokemon; else skeleton" class="container">
+  <span class="container__name">{{ pokemon.name }}</span>
+  <img class="container__avatar" [src]="pokemon.imgUrl" alt="" />
+  <div class="container__types">
+    <span class="container__type" *ngFor="let type of pokemon.types">{{
+      type
+    }}</span>
+  </div>
+</section>
+
+<ng-template #skeleton>
+  <section class="skeleton"></section>
+</ng-template>

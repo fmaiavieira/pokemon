@@ -1,11 +1,12 @@
 .container {
   border-radius: 10px;
-  width: 270px;
-  height: 270px;
+  width: 200px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  cursor: pointer;
 
   &__avatar {
     max-height: 50%;
@@ -26,4 +27,10 @@
     color: #ffffff;
     background-color: #ffffff47;
   }
+}
+
+.skeleton {
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
 }

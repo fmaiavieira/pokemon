@@ -1,13 +1,18 @@
 <section
-  *ngIf="details$ | async as pokemon"
+  *ngIf="details$ | async as pokemonDetails; else skeleton"
   class="container"
-  [style.backgroundColor]="pokemon.bgColor"
+  [style.backgroundColor]="pokemonDetails.bgColor"
+  (click)="onSelect.emit(pokemonDetails)"
 >
-  <span class="container__name">{{ pokemon.name }}</span>
-  <img class="container__avatar" [src]="pokemon.imgUrl" alt="" />
+  <span class="container__name">{{ pokemonDetails.name }}</span>
+  <img class="container__avatar" [src]="pokemonDetails.imgUrl" alt="" />
   <div class="container__types">
-    <span class="container__type" *ngFor="let type of pokemon.types">{{
+    <span class="container__type" *ngFor="let type of pokemonDetails.types">{{
       type
     }}</span>
   </div>
 </section>
+
+<ng-template #skeleton>
+  <section class="skeleton"></section>
+</ng-template>

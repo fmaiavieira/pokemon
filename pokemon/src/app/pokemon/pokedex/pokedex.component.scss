@@ -2,14 +2,30 @@
   display: flex;
 
   &__cards-list {
+    margin: 0 0 20px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
     flex: 5;
 
+    &__search-box {
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 10px;
+      background-color: #ffffff;
+      padding: 15px 20px 0;
+      display: flex;
+      gap: 10px;
+
+      &__field {
+        flex: 1;
+      }
+    }
+
     &__paginator {
       width: 100%;
+      border-radius: 10px;
     }
   }
   &__details {

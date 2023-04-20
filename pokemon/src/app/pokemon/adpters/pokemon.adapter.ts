@@ -7,7 +7,7 @@ export class PokemonAdapter {
     const name = data.name;
     return {
       ...data,
-      imgUrl: `assets/pokemons/poke_${data.id}.gif`,
+      imgUrl: data.sprites.front_default,
       bgColor: TYPE_COLOR[type.type.name],
       types: data.types.map((slot) => slot.type.name),
       name: name.charAt(0).toUpperCase() + name.slice(1),

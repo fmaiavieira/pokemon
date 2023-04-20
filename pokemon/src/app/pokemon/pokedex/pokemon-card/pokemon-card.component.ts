@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NameLink } from '../../interfaces/type-dto.interface';
 import { PokemonService } from '../../pokemon.service';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: NameLink;
+  @Output() onSelect = new EventEmitter<any>();
   public details$?: Observable<any>;
 
   constructor(private readonly pokemonService: PokemonService) {}
