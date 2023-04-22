@@ -1,10 +1,32 @@
 import { ChartConfiguration } from 'chart.js';
 import { DAMAGE } from '../constants/damages';
 import { TYPE_COLOR } from '../constants/types-color';
-import { DamageRelations } from '../interfaces/type-dto.interface';
+import { DamageRelations } from '../interfaces/dtos/type-dto.interface';
+import { BarChart } from '../interfaces/bar-chart.interface';
 
 export class PokemonTypeAdapter {
-  static toChart(data: DamageRelations): ChartConfiguration<'bar'>['data'] {
+  static toChart(data: DamageRelations): BarChart {
+    const barChartOptions: ChartConfiguration<'bar'>['options'] = {
+      // responsive: true,
+      plugins: {
+        title: {
+          text: `Eficiência de dano do tipo`,
+          display: true,
+          font: {
+            size: 18,
+          },
+        },
+        legend: {
+          display: true,
+        },
+      },
+      scales: {
+        y: {
+          suggestedMax: 2.5,
+        },
+      },
+      maintainAspectRatio: false,
+    };
     let labels: string[] = [];
     let dataset: any = {
       data: [],
@@ -21,16 +43,19 @@ export class PokemonTypeAdapter {
       value.forEach((value: any) => {
         labels.push(value.name);
         dataset.data.push(DAMAGE[key]);
-        dataset.backgroundColor.push(TYPE_COLOR[value.name]);
-        dataset.hoverBackgroundColor.push(`${TYPE_COLOR[value.name]}bb`);
+        dataset.backgroundColor!.push(TYPE_COLOR[value.name]);
+        dataset.hoverBackgroundColor!.push(`${TYPE_COLOR[value.name]}bb`);
       });
     });
 
-    const chartData = {
+    const barChartData = {
       labels,
       datasets: [dataset],
     };
 
-    return chartData;
+    return {
+      barChartOptions,
+      barChartData,
+    };
   }
 }

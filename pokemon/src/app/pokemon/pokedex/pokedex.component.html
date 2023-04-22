@@ -1,6 +1,6 @@
 <section class="container">
   <div class="container__cards-list">
-    <div class="container__cards-list__search-box">
+    <div class="container__cards-list__search-box radius shadow">
       <mat-form-field
         class="container__cards-list__search-box__field"
         appearance="outline"
@@ -22,19 +22,21 @@
         trackBy: pokemonTrackByFn
       "
       [pokemon]="pokemon"
+      [activePokemon]="selectedPokemon"
       (onSelect)="setSelectedPokemon($event)"
     ></app-pokemon-card>
-    <ng-container *ngTemplateOutlet="paginator"></ng-container>
   </div>
   <app-pokemon-details
+    *appMinWidth="768"
     class="container__details"
     [pokemon]="selectedPokemon"
+    [@expandAnimation]="selectedPokemon ? 'open' : 'close'"
   ></app-pokemon-details>
 </section>
 
 <ng-template #paginator>
   <mat-paginator
-    class="container__cards-list__paginator"
+    class="container__cards-list__paginator radius shadow"
     [length]="pokemonsLength$ | async"
     [pageSize]="12"
     [pageSizeOptions]="[12, 24, 48]"

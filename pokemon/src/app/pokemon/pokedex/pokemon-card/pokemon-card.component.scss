@@ -1,12 +1,10 @@
 .container {
-  border-radius: 10px;
-  width: 200px;
-  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   cursor: pointer;
+  padding: 10px;
 
   &__avatar {
     max-height: 50%;
@@ -21,16 +19,21 @@
   }
 
   &__type {
-    border-radius: 20px;
+    font-weight: 500;
     padding: 3px 8px;
     margin: 2px;
     color: #ffffff;
     background-color: #ffffff47;
   }
 }
+.active {
+  .container__name,
+  .container__type {
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
 
 .skeleton {
-  border-radius: 10px;
   width: 200px;
   height: 200px;
 }

@@ -2,7 +2,7 @@ import { Store } from 'src/app/shared/store';
 import { PokemonService } from '../pokemon.service';
 import { take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { NameLink } from '../interfaces/type-dto.interface';
+import { NameLink } from '../interfaces/dtos/type-dto.interface';
 
 interface PokedexStateInterface {
   pokemons: NameLink[];

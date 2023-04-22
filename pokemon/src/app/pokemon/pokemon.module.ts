@@ -10,6 +10,7 @@ import { PokemonCardComponent } from './pokedex/pokemon-card/pokemon-card.compon
 import { SharedModule } from '../shared/shared.module';
 import { PokedexStore } from './pokedex/pokedex.store';
 import { PokemonDetailsComponent } from './pokedex/pokemon-details/pokemon-details.component';
+import { PokemonStatComponent } from './pokedex/pokemon-details/pokemon-stat/pokemon-stat.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PokemonDetailsComponent } from './pokedex/pokemon-details/pokemon-detai
     PokedexComponent,
     PokemonCardComponent,
     PokemonDetailsComponent,
+    PokemonStatComponent,
   ],
   imports: [
     PokemonRoutingModule,

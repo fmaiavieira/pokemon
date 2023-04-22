@@ -16,26 +16,8 @@ export class PokemonTypesComponent implements OnInit, OnDestroy {
   public searchControl = new FormControl('ground');
   public typeOptions: string[] = [];
   public filteredTypeOptions$: Observable<string[]> = of([]);
-  public barChartLegend = false;
-  public barChartPlugins = [];
-  public barChartData$ = this.pokemonService.getPokemonType();
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true,
-    plugins: {
-      title: {
-        text: `Eficiência de dano do tipo`,
-        display: true,
-        font: {
-          size: 18,
-        },
-      },
-    },
-    scales: {
-      y: {
-        suggestedMax: 2.5,
-      },
-    },
-  };
+
+  public barChart$ = this.pokemonService.getPokemonTypeChart();
 
   constructor(private readonly pokemonService: PokemonService) {}
 
@@ -49,7 +31,7 @@ export class PokemonTypesComponent implements OnInit, OnDestroy {
   }
 
   search(event?: MatAutocompleteSelectedEvent) {
-    this.barChartData$ = this.pokemonService.getPokemonType(
+    this.barChart$ = this.pokemonService.getPokemonTypeChart(
       event?.option.value
     );
   }

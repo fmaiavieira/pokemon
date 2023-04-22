@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NameLink } from '../../interfaces/type-dto.interface';
+import { NameLink } from '../../interfaces/dtos/type-dto.interface';
 import { PokemonService } from '../../pokemon.service';
 import { Observable } from 'rxjs';
+import { Pokemon } from '../../interfaces/pokemon.interface';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -10,8 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: NameLink;
-  @Output() onSelect = new EventEmitter<any>();
-  public details$?: Observable<any>;
+  @Input() activePokemon?: Pokemon;
+  @Output() onSelect = new EventEmitter<Pokemon>();
+  public details$?: Observable<Pokemon>;
 
   constructor(private readonly pokemonService: PokemonService) {}
 

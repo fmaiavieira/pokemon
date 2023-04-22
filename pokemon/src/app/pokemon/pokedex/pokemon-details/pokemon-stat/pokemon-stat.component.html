@@ -1,0 +1,14 @@
+<section class="container">
+  <span class="container__stat-name">{{ stat.name }}</span>
+  <div class="container__stat-bar">
+    <div
+      class="container__stat-bar__progress"
+      [style.width.%]="stat.value"
+      [style.backgroundColor]="stat.color"
+    >
+      <span class="container__stat-bar__progress__value">
+        {{ stat.value }}
+      </span>
+    </div>
+  </div>
+</section>

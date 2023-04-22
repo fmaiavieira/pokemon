@@ -1,18 +1,21 @@
 <section
   *ngIf="details$ | async as pokemonDetails; else skeleton"
-  class="container"
+  class="container radius"
   [style.backgroundColor]="pokemonDetails.bgColor"
+  [ngClass]="{ active: activePokemon?.id === pokemonDetails.id }"
   (click)="onSelect.emit(pokemonDetails)"
 >
   <span class="container__name">{{ pokemonDetails.name }}</span>
   <img class="container__avatar" [src]="pokemonDetails.imgUrl" alt="" />
   <div class="container__types">
-    <span class="container__type" *ngFor="let type of pokemonDetails.types">{{
-      type
-    }}</span>
+    <span
+      class="container__type radius"
+      *ngFor="let type of pokemonDetails.types"
+      >{{ type.name }}</span
+    >
   </div>
 </section>
 
 <ng-template #skeleton>
-  <section class="skeleton"></section>
+  <section class="skeleton radius"></section>
 </ng-template>

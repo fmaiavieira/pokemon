@@ -11,19 +11,42 @@
   &__tab-group {
     display: flex;
     flex-direction: column;
-    max-width: calc(100% + 10px);
-    width: calc(100% + 10px);
+    justify-content: center;
+
+    padding: 5px;
 
     ::ng-deep .mat-tab-header {
       border-radius: 10px;
       background-color: #ffffff;
       padding: 0 10px;
+      width: calc(100% - 30px);
+      box-shadow: 0px 0px 5px 1px rgb(0 0 0 / 20%);
+      align-self: center;
     }
     ::ng-deep .mat-mdc-tab-body-content,
     ::ng-deep .mat-mdc-tab-labels {
       padding: 0 10px;
       visibility: visible !important;
       min-height: unset !important;
+      overflow: unset;
+    }
+
+    ::ng-deep .mat-tab-body-content {
+      padding: 0 5px;
+      overflow: unset;
+      height: 100%;
+      contain: paint;
+    }
+    ::ng-deep .mat-tab-body-wrapper {
+      height: 100%;
+      contain: paint;
+      overflow: unset;
+    }
+    ::ng-deep .mat-tab-body {
+      height: 100%;
+      width: 100%;
+      contain: paint;
+      overflow: unset;
     }
     ::ng-deep .mat-tab-label-active {
       opacity: 1;

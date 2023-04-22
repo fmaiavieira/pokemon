@@ -12,6 +12,7 @@ import {
   MatPaginatorModule,
 } from '@angular/material/paginator';
 import { CustomMatPaginator } from './custom-mat-paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const MATERIAL_COMPONENTS = [
   MatTabsModule,
@@ -23,6 +24,7 @@ const MATERIAL_COMPONENTS = [
   MatInputModule,
   MatAutocompleteModule,
   MatPaginatorModule,
+  MatDialogModule,
 ];
 
 @NgModule({

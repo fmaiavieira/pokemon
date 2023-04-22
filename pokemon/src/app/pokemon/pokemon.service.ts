@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 import { urlConfig } from '../config/url.config';
 import { PokemonTypeAdapter } from './adpters/pokemon-type.adapter';
-import { TypeDto } from './interfaces/type-dto.interface';
+import { TypeDto } from './interfaces/dtos/type-dto.interface';
 import { PokemonTypesAdapter } from './adpters/types.adaptes';
-import { TypesDto } from './interfaces/types-dto.interface';
-import { ChartConfiguration } from 'chart.js';
+import { TypesDto } from './interfaces/dtos/types-dto.interface';
 import { PokemonAdapter } from './adpters/pokemon.adapter';
-import { PokemonDto } from './interfaces/pokemon-dto.interface copy';
+import { PokemonDto } from './interfaces/dtos/pokemon-dto.interface';
+import { PokemonsDto } from './interfaces/dtos/pokemons-dto.interface';
+import { BarChart } from './interfaces/bar-chart.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,9 @@ import { PokemonDto } from './interfaces/pokemon-dto.interface copy';
 export class PokemonService {
   constructor(private readonly http: HttpClient) {}
 
-  public getPokemonType(
+  public getPokemonTypeChart(
     searchParam: string = 'ground'
-  ): Observable<ChartConfiguration<'bar'>['data']> {
+  ): Observable<BarChart> {
     return this.http
       .get<TypeDto>(urlConfig.pokemonType(searchParam))
       .pipe(pluck('damage_relations'), map(PokemonTypeAdapter.toChart));
@@ -34,8 +35,8 @@ export class PokemonService {
   public getPokemons(
     offset: number = 0,
     limit: number = 100000
-  ): Observable<any> {
-    return this.http.get<any>(urlConfig.pokemons(offset, limit)).pipe();
+  ): Observable<PokemonsDto> {
+    return this.http.get<PokemonsDto>(urlConfig.pokemons(offset, limit)).pipe();
   }
 
   public getPokemonDetail(url: string): Observable<any> {

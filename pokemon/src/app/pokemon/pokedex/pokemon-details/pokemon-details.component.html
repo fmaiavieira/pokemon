@@ -1,13 +1,60 @@
-<section *ngIf="pokemon; else skeleton" class="container">
-  <span class="container__name">{{ pokemon.name }}</span>
-  <img class="container__avatar" [src]="pokemon.imgUrl" alt="" />
-  <div class="container__types">
-    <span class="container__type" *ngFor="let type of pokemon.types">{{
-      type
-    }}</span>
+<section *ngIf="pokemon" class="container radius shadow">
+  <div
+    class="container__avatar radius"
+    [style.backgroundColor]="pokemon.bgColor"
+  >
+    <img class="container__avatar__img" [src]="pokemon.imgUrl" alt="" />
+    <span class="container__avatar__name"
+      >{{ pokemon.name }} {{ pokemon.id }}</span
+    >
+  </div>
+  <div class="container__infos">
+    <div class="container__infos__types">
+      <span
+        class="container__infos__type radius"
+        *ngFor="let type of pokemon.types"
+        [style.backgroundColor]="type.bgColor"
+        >{{ type.name }}</span
+      >
+    </div>
+    <div class="container__infos__characteristics">
+      <span class="title">Características</span>
+
+      <div class="container__infos__characteristics__item">
+        <span class="container__infos__characteristics__item__title"
+          >Altura:
+        </span>
+        <span class="container__infos__characteristics__item__value">{{
+          pokemon.height
+        }}</span>
+      </div>
+      <div class="container__infos__characteristics__item">
+        <span class="container__infos__characteristics__item__title"
+          >Peso:
+        </span>
+        <span class="container__infos__characteristics__item__value">{{
+          pokemon.weight
+        }}</span>
+      </div>
+    </div>
+    <div class="container__infos__abilities">
+      <span class="title">Habilidades</span>
+      <span
+        class="container__infos__abilities__ability"
+        *ngFor="let ability of pokemon.abilities"
+        >{{ ability }}</span
+      >
+    </div>
+    <div class="container__infos__stats">
+      <span class="title">Estatísticas</span>
+      <app-pokemon-stat
+        *ngFor="let stat of pokemon.stats"
+        [stat]="stat"
+      ></app-pokemon-stat>
+    </div>
   </div>
 </section>
 
 <ng-template #skeleton>
-  <section class="skeleton"></section>
+  <section class="skeleton radius"></section>
 </ng-template>

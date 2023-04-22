@@ -1,5 +1,5 @@
-<section class="container">
-  <div class="container__search-box">
+<section class="container radius">
+  <div class="container__search-box radius shadow">
     <mat-form-field class="container__search-box__field" appearance="outline">
       <mat-label>Buscar Por tipo</mat-label>
       <input
@@ -24,14 +24,15 @@
     </mat-form-field>
   </div>
 
-  <canvas
-    baseChart
-    class="container__chart"
-    [data]="(barChartData$ | async)!"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [type]="'bar'"
-  >
-  </canvas>
+  <div class="container__chart-box">
+    <canvas
+      baseChart
+      class="container__chart-box__chart radius shadow"
+      [data]="(barChart$ | async)?.barChartData"
+      [options]="(barChart$ | async)?.barChartOptions"
+      [legend]="true"
+      [type]="'bar'"
+    >
+    </canvas>
+  </div>
 </section>
