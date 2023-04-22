@@ -26,6 +26,13 @@
     &__img {
       max-width: 60%;
     }
+
+    &__close {
+      color: #ffffff;
+      position: absolute;
+      right: 0;
+      margin: 5px;
+    }
   }
 
   &__infos {
@@ -43,6 +50,7 @@
 
       &__item {
         margin: 3px 0 0;
+        color: #7a7a7a;
       }
     }
 
@@ -75,6 +83,21 @@
       width: 100%;
       padding: 10px 0;
     }
+  }
+}
+
+::ng-deep .pokemon-details-dialog {
+  .mat-dialog-container {
+    padding: 0;
+    border-radius: 11px;
+    margin: 15px;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  .container {
+    margin: 0;
+    overflow-y: auto;
   }
 }
 

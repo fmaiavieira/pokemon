@@ -1,9 +1,5 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from '../../interfaces/pokemon.interface';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { currentViewportObservable } from 'src/app/shared/current-viewport';
-import { of } from 'rxjs';
-import { switchMap, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -12,8 +8,5 @@ import { switchMap, distinctUntilChanged } from 'rxjs/operators';
 })
 export class PokemonDetailsComponent {
   @Input() pokemon?: Pokemon;
-
-  // close() {
-  //   this.dialogRef?.close();
-  // }
+  @Output() closeDetails = new EventEmitter();
 }

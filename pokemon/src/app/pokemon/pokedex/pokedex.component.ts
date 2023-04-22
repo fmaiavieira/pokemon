@@ -60,27 +60,45 @@ export class PokedexComponent implements OnInit, OnDestroy {
     this.pokedexStore.filteredByName(event?.option.value);
   }
 
-  setSelectedPokemon(pokemon: any) {
+  setSelectedPokemon(pokemon: Pokemon) {
     this.selectedPokemon = pokemon;
 
     currentViewportObservable.currentViewport$
       .pipe(
+        takeUntil(this.destroy$),
         switchMap((width) => of(width < 768)),
         distinctUntilChanged()
       )
       .subscribe((value) => {
-        value ? this.openDetailsDialog() : this.dialog.closeAll();
+        value && this.selectedPokemon
+          ? this.openDetailsDialog()
+          : this.dialog.closeAll();
       });
   }
 
   openDetailsDialog() {
-    const dialogRef = this.dialog.open(
-      PokemonDetailsComponent
-    ).componentInstance;
-    dialogRef.pokemon = this.selectedPokemon;
+    this.dialog.closeAll();
+
+    const dialogRef = this.dialog.open(PokemonDetailsComponent, {
+      panelClass: 'pokemon-details-dialog',
+    });
+    dialogRef.componentInstance.pokemon = this.selectedPokemon;
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        if (!value) {
+          return;
+        }
+        this.unselectPokemon();
+      });
   }
 
-  pokemonTrackByFn(index: number, item: any) {
+  unselectPokemon() {
+    this.selectedPokemon = undefined;
+  }
+
+  pokemonTrackByFn(index: number, item: NameLink) {
     return item.name;
   }
   private setupSearchObserver(): void {

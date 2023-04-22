@@ -1,8 +1,8 @@
 <section class="container">
-  <div class="container__cards-list">
-    <div class="container__cards-list__search-box radius shadow">
+  <div class="container__cards-box">
+    <div class="container__cards-box__search-box radius shadow">
       <mat-form-field
-        class="container__cards-list__search-box__field"
+        class="container__cards-box__search-box__field"
         appearance="outline"
       >
         <mat-label>Buscar Pokemon</mat-label>
@@ -15,28 +15,34 @@
       </mat-form-field>
     </div>
     <ng-container *ngTemplateOutlet="paginator"></ng-container>
-    <app-pokemon-card
-      class="container__cards-list__card"
-      *ngFor="
-        let pokemon of currentPagePokemons$ | async;
-        trackBy: pokemonTrackByFn
-      "
-      [pokemon]="pokemon"
-      [activePokemon]="selectedPokemon"
-      (onSelect)="setSelectedPokemon($event)"
-    ></app-pokemon-card>
+    <div
+      class="container__cards-box__card-list"
+      [ngClass]="{ isDetailsOpen: selectedPokemon }"
+    >
+      <app-pokemon-card
+        class="container__cards-box__card-list__card"
+        *ngFor="
+          let pokemon of currentPagePokemons$ | async;
+          trackBy: pokemonTrackByFn
+        "
+        [pokemon]="pokemon"
+        [activePokemon]="selectedPokemon"
+        (onSelect)="setSelectedPokemon($event)"
+      ></app-pokemon-card>
+    </div>
   </div>
   <app-pokemon-details
     *appMinWidth="768"
     class="container__details"
     [pokemon]="selectedPokemon"
     [@expandAnimation]="selectedPokemon ? 'open' : 'close'"
+    (closeDetails)="unselectPokemon()"
   ></app-pokemon-details>
 </section>
 
 <ng-template #paginator>
   <mat-paginator
-    class="container__cards-list__paginator radius shadow"
+    class="container__cards-box__paginator radius shadow"
     [length]="pokemonsLength$ | async"
     [pageSize]="12"
     [pageSizeOptions]="[12, 24, 48]"

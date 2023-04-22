@@ -1,7 +1,7 @@
 .container {
   display: flex;
 
-  &__cards-list {
+  &__cards-box {
     margin: 0 0 20px 0;
     display: flex;
     flex-wrap: wrap;
@@ -25,14 +25,41 @@
       width: 100%;
     }
 
-    &__card {
-      flex: 1;
-      min-width: 225px;
-      max-width: 400px;
+    &__card-list {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
 
-      @media screen and (max-width: 768px) {
-        min-width: 200px;
-        max-width: 400px;
+      @media screen and(max-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      @media screen and(max-width: 600px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media screen and(max-width: 400px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__card-list.isDetailsOpen {
+      grid-template-columns: 1fr 1fr 1fr;
+
+      @media screen and(max-width: 920px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media screen and(max-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      @media screen and(max-width: 600px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media screen and(max-width: 400px) {
+        grid-template-columns: 1fr;
       }
     }
   }

@@ -16,9 +16,9 @@ export const expandAnimation = trigger('expandAnimation', [
   state(
     'open',
     style({
-      transform: 'scale(1) ',
+      transform: 'scale(1) translateX(0)',
     })
   ),
   transition('close => open', [animate('250ms ease-in')]),
-  transition('open => close', [animate('1s ease-in')]),
+  transition('open => close', [animate('250ms ease-in')]),
 ]);

@@ -3,6 +3,14 @@
     class="container__avatar radius"
     [style.backgroundColor]="pokemon.bgColor"
   >
+    <button
+      class="container__avatar__close"
+      mat-icon-button
+      mat-dialog-close="true"
+      (click)="closeDetails.emit()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
     <img class="container__avatar__img" [src]="pokemon.imgUrl" alt="" />
     <span class="container__avatar__name"
       >{{ pokemon.name }} {{ pokemon.id }}</span

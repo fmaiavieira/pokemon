@@ -1,13 +1,15 @@
 import { ChartConfiguration } from 'chart.js';
 import { DAMAGE } from '../constants/damages';
 import { TYPE_COLOR } from '../constants/types-color';
-import { DamageRelations } from '../interfaces/dtos/type-dto.interface';
+import {
+  DamageRelations,
+  NameLink,
+} from '../interfaces/dtos/type-dto.interface';
 import { BarChart } from '../interfaces/bar-chart.interface';
 
 export class PokemonTypeAdapter {
   static toChart(data: DamageRelations): BarChart {
     const barChartOptions: ChartConfiguration<'bar'>['options'] = {
-      // responsive: true,
       plugins: {
         title: {
           text: `Eficiência de dano do tipo`,
@@ -25,7 +27,7 @@ export class PokemonTypeAdapter {
           suggestedMax: 2.5,
         },
       },
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
     };
     let labels: string[] = [];
     let dataset: any = {
@@ -40,7 +42,7 @@ export class PokemonTypeAdapter {
       if (!key.includes('to')) {
         return;
       }
-      value.forEach((value: any) => {
+      value.forEach((value: NameLink) => {
         labels.push(value.name);
         dataset.data.push(DAMAGE[key]);
         dataset.backgroundColor!.push(TYPE_COLOR[value.name]);
