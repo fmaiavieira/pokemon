@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-class CurrentViewportObservable {
+@Injectable({ providedIn: 'root' })
+export class CurrentViewport {
   private _subject$: BehaviorSubject<number>;
 
   constructor() {
@@ -20,5 +22,3 @@ class CurrentViewportObservable {
     return this._subject$.getValue();
   }
 }
-
-export const currentViewportObservable = new CurrentViewportObservable();

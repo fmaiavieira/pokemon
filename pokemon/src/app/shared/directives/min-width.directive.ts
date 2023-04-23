@@ -7,7 +7,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Subscription, of } from 'rxjs';
-import { currentViewportObservable } from '../current-viewport';
+import { CurrentViewport } from '../current-viewport';
 import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Directive({
@@ -21,11 +21,12 @@ export class MinWidthDirective implements OnDestroy {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private currentViewport: CurrentViewport
   ) {}
 
   ngOnInit(): void {
-    this.subscription = currentViewportObservable.currentViewport$
+    this.subscription = this.currentViewport.currentViewport$
       .pipe(
         switchMap((width) => of(width < this.appMinWidth)),
         distinctUntilChanged()

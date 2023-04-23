@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Observable, Subject, of } from 'rxjs';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
@@ -24,19 +23,14 @@ export class PokemonTypesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAutocompleteOptions();
     this.search();
-    setInterval(() => {
-      console.log(this.chartheight);
-    }, 1000);
   }
 
   ngOnDestroy() {
     this.destroy$.complete();
   }
 
-  search(event?: MatAutocompleteSelectedEvent) {
-    this.barChart$ = this.pokemonService.getPokemonTypeChart(
-      event?.option.value
-    );
+  search(term?: string) {
+    this.barChart$ = this.pokemonService.getPokemonTypeChart(term);
   }
 
   updateChartHeight(event: number) {

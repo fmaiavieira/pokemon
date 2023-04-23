@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PokemonDetailsComponent } from './pokemon-details.component';
 
 describe('PokemonDetailsComponent', () => {
@@ -8,14 +7,15 @@ describe('PokemonDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PokemonDetailsComponent ]
-    })
-    .compileComponents();
+      declarations: [PokemonDetailsComponent],
+      providers: [],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PokemonDetailsComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 

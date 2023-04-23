@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { MinWidthDirective } from './directives/min-width.directive';
-import { GetCurrentHeightDirective } from './directives/get-current-height.directive';
+import { GetCurrentVhHeightDirective } from './directives/get-current-vh-height.directive';
 
 @NgModule({
-  declarations: [MinWidthDirective, GetCurrentHeightDirective],
+  declarations: [MinWidthDirective, GetCurrentVhHeightDirective],
   imports: [CommonModule, MaterialModule],
   exports: [
     CommonModule,
     MaterialModule,
     MinWidthDirective,
-    GetCurrentHeightDirective,
+    GetCurrentVhHeightDirective,
   ],
 })
 export class SharedModule {}

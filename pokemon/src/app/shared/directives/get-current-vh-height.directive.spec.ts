@@ -1,23 +1,30 @@
-import { MinWidthDirective } from './min-width.directive';
 import { Component } from '@angular/core';
+import { GetCurrentVhHeightDirective } from './get-current-vh-height.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CurrentViewport } from '../current-viewport';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
-  template: ` <div class="test-element" *appMinWidth="768"></div> `,
+  template: `
+    <div
+      [style]="{ height: '10vh' }"
+      (appGetCurrentVhHeight)="currentHeight = $event"
+    ></div>
+  `,
 })
-class HostComponent {}
+class HostComponent {
+  currentHeight: number = 15;
+}
 
-describe('MinWidthDirective', () => {
+describe('GetCurrentHeightDirective', () => {
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
-  let currentWidth = new BehaviorSubject(1000);
+  let currentWidth = 1000;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MinWidthDirective, HostComponent],
+      declarations: [GetCurrentVhHeightDirective, HostComponent],
       providers: [
         {
           provide: CurrentViewport,
@@ -25,8 +32,8 @@ describe('MinWidthDirective', () => {
             'CurrentViewport',
             {},
             {
-              currentViewport: currentWidth.getValue(),
-              currentViewport$: currentWidth,
+              currentViewport: currentWidth,
+              currentViewport$: of(currentWidth),
             }
           ),
         },
@@ -40,18 +47,15 @@ describe('MinWidthDirective', () => {
 
   it('should create an component', () => {
     expect(
-      fixture.debugElement.queryAll(By.directive(MinWidthDirective))
+      fixture.debugElement.queryAll(By.directive(GetCurrentVhHeightDirective))
     ).toBeTruthy();
   });
 
-  it(`should show element when width is bigger than min widht`, () => {
-    fixture = TestBed.createComponent(HostComponent);
-    currentWidth.next(1000);
+  it('should return current height', () => {
+    const expected =
+      (100 * fixture.nativeElement.clientHeight) / window.innerHeight;
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.test-element')).toBeTruthy();
 
-    currentWidth.next(700);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.test-element')).toBeNull();
+    expect(component.currentHeight).toEqual(expected);
   });
 });

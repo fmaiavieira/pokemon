@@ -1,5 +1,4 @@
-import { Injectable, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { PokemonComponent } from './pokemon.component';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PokemonTypesComponent } from './pokemon-types/pokemon-types.component';

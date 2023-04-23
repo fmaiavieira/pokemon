@@ -10,13 +10,12 @@ import {
   tap,
 } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Pokemon } from '../interfaces/pokemon.interface';
 import { NameLink } from '../interfaces/dtos/type-dto.interface';
 import { expandAnimation } from '../animations/expand.animation';
 import { MatDialog } from '@angular/material/dialog';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
-import { currentViewportObservable } from 'src/app/shared/current-viewport';
+import { CurrentViewport } from 'src/app/shared/current-viewport';
 
 @Component({
   selector: 'app-pokedex',
@@ -35,7 +34,8 @@ export class PokedexComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly pokedexStore: PokedexStore,
-    public readonly dialog: MatDialog
+    public readonly dialog: MatDialog,
+    public readonly currentViewport: CurrentViewport
   ) {}
 
   ngOnInit(): void {
@@ -56,14 +56,10 @@ export class PokedexComponent implements OnInit, OnDestroy {
     this.pokedexStore.setActivePage(event.pageIndex, event.pageSize);
   }
 
-  searchPokemon(event?: MatAutocompleteSelectedEvent) {
-    this.pokedexStore.filteredByName(event?.option.value);
-  }
-
   setSelectedPokemon(pokemon: Pokemon) {
     this.selectedPokemon = pokemon;
 
-    currentViewportObservable.currentViewport$
+    this.currentViewport.currentViewport$
       .pipe(
         takeUntil(this.destroy$),
         switchMap((width) => of(width < 768)),
@@ -101,6 +97,7 @@ export class PokedexComponent implements OnInit, OnDestroy {
   pokemonTrackByFn(index: number, item: NameLink) {
     return item.name;
   }
+
   private setupSearchObserver(): void {
     this.searchControl.valueChanges
       .pipe(

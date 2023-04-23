@@ -36,7 +36,7 @@ export class PokemonService {
     offset: number = 0,
     limit: number = 100000
   ): Observable<PokemonsDto> {
-    return this.http.get<PokemonsDto>(urlConfig.pokemons(offset, limit)).pipe();
+    return this.http.get<PokemonsDto>(urlConfig.pokemons(offset, limit));
   }
 
   public getPokemonDetail(url: string): Observable<any> {

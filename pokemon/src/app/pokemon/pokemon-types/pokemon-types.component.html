@@ -12,7 +12,7 @@
       <mat-autocomplete
         autoActiveFirstOption
         #auto="matAutocomplete"
-        (optionSelected)="search($event)"
+        (optionSelected)="search($event.option.value)"
       >
         <mat-option
           *ngFor="let option of filteredTypeOptions$ | async"
@@ -32,7 +32,7 @@
       [options]="(barChart$ | async)?.barChartOptions"
       [legend]="true"
       [type]="'bar'"
-      (appGetCurrentHeight)="updateChartHeight($event)"
+      (appGetCurrentVhHeight)="updateChartHeight($event)"
     >
     </canvas>
   </div>

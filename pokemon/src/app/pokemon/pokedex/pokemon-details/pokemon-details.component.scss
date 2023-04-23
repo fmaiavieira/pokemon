@@ -84,6 +84,9 @@
       padding: 10px 0;
     }
   }
+  .dialog-close {
+    display: none;
+  }
 }
 
 ::ng-deep .pokemon-details-dialog {
@@ -98,6 +101,16 @@
   .container {
     margin: 0;
     overflow-y: auto;
+
+    &__avatar__close {
+      display: none;
+      &.dialog-close {
+        display: block !important;
+      }
+    }
+    &__avatar__close.dialog-close {
+      display: block;
+    }
   }
 }
 
