@@ -6,7 +6,22 @@
   (click)="onSelect.emit(pokemonDetails)"
 >
   <span class="container__name">{{ pokemonDetails.name }}</span>
-  <img class="container__avatar" [src]="pokemonDetails.imgUrl" alt="" />
+  <img
+    class="container__avatar"
+    loading="lazy"
+    [src]="pokemonDetails.imgUrl"
+    [alt]="pokemonDetails.name"
+    (load)="imageLoading = false"
+    [ngStyle]="{
+      visibility: imageLoading ? 'hidden' : '',
+      height: imageLoading ? '0' : '96px'
+    }"
+  />
+  <mat-spinner
+    *ngIf="imageLoading"
+    color="accent"
+    [diameter]="50"
+  ></mat-spinner>
   <div class="container__types">
     <span
       class="container__type radius"
@@ -17,5 +32,11 @@
 </section>
 
 <ng-template #skeleton>
-  <section class="skeleton radius"></section>
+  <section class="skeleton radius">
+    <mat-spinner
+      class="skeleton__spinner"
+      color="accent"
+      [diameter]="50"
+    ></mat-spinner>
+  </section>
 </ng-template>

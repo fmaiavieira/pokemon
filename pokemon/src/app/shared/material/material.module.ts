@@ -14,6 +14,7 @@ import {
 import { CustomMatPaginator } from './custom-mat-paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MATERIAL_COMPONENTS = [
   MatTabsModule,
@@ -27,6 +28,7 @@ const MATERIAL_COMPONENTS = [
   MatPaginatorModule,
   MatDialogModule,
   MatSnackBarModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

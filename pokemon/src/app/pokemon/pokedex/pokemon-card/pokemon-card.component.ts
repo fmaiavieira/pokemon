@@ -13,6 +13,7 @@ export class PokemonCardComponent implements OnInit {
   @Input() pokemon!: NameLink;
   @Input() activePokemon?: Pokemon;
   @Output() onSelect = new EventEmitter<Pokemon>();
+  public imageLoading = true;
   public details$?: Observable<Pokemon>;
 
   constructor(private readonly pokemonService: PokemonService) {}
